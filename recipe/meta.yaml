@@ -1,5 +1,5 @@
 {% set name = "pylyzer" %}
-{% set version = "0.0.22" %}
+{% set version = "0.0.23" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pylyzer-{{ version }}.tar.gz
-  sha256: 131571ab5aa5bce6589b9766b7c7e71434cfcbed082178d80c56195c3470cfdb
+  sha256: 006d97a1527e427e524cae0d57f4d53f8593633c0fe2a055329de896956ca7e7
 
 build:
   skip: true  # [py<37]
