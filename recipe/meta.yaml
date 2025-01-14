@@ -1,27 +1,29 @@
 {% set name = "pylyzer" %}
-{% set version = "0.0.44" %}
+{% set version = "0.0.76" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pylyzer-{{ version }}.tar.gz
-  sha256: ad70eb26e4d859a1115bb2d42cb7d718f1c58729e5378d89e1116efd71a1216d
+  url: https://github.com/mtshiba/pylyzer/archive/v{{ version }}.tar.gz
+  sha256: e6e60ddcff14ec57e13fd810f57fa105d5ce5a1795fbe58c37684d69dcf4c52d
 
 build:
-  skip: true  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 2
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - {{ compiler('rust') }} >=1.66,<1.75
+    - {{ compiler('rust') }}
+    - python                              # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
   host:
     - python
     - maturin >=0.12
+    - setuptools-rust
     - pip
   run:
     - python
@@ -43,4 +45,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - danielnachun
     - thewchan
