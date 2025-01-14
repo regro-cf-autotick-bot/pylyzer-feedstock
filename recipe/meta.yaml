@@ -1,5 +1,5 @@
 {% set name = "pylyzer" %}
-{% set version = "0.0.44" %}
+{% set version = "0.0.76" %}
 
 package:
   name: {{ name|lower }}
@@ -10,15 +10,14 @@ source:
   sha256: ad70eb26e4d859a1115bb2d42cb7d718f1c58729e5378d89e1116efd71a1216d
 
 build:
-  skip: true  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 2
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - {{ compiler('rust') }} >=1.66,<1.75
+    - {{ compiler('rust') }}
   host:
     - python
     - maturin >=0.12
@@ -43,4 +42,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - danielnachun
     - thewchan
