@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('rust') }}
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
   host:
     - python
     - maturin >=0.12
